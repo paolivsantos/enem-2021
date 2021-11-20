@@ -1,0 +1,1 @@
+export default [...Array(180).keys()].map(k => '-')

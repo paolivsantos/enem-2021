@@ -1,6 +1,6 @@
 import questoesProvas from '../helpers/questoes-provas'
 
-export default function Answers({ day }) {
+export default function Answers({ day, answersData }) {
 
   return (
     <main>
@@ -20,7 +20,7 @@ export default function Answers({ day }) {
                   key={j} 
                 >
                   <span className="text-sm">{id}</span>
-                  <span className="text-base uppercase font-bold" data-js-answer>-</span>
+                  <span className="text-base uppercase font-bold" data-js-answer>{answersData[k]}</span>
                 </div>
               )
             })}

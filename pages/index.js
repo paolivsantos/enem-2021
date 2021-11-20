@@ -3,9 +3,11 @@ import { useState } from 'react'
 import Answers from '../components/Answers'
 import Header from '../components/Header'
 import coresProvas from '../helpers/cores-provas'
+import respostasProvas from '../helpers/respostas-prova'
 
 export default function Home() {
   const [day, setDay] = useState('01')
+  const [answersData, setAnswersData] = useState(respostasProvas)
 
   useState(() => {
     const defaultDay = day
@@ -38,7 +40,7 @@ export default function Home() {
 
       <section className="container mx-auto my-5 px-8 md:py-0">
         <Header coresProvas={coresProvas} setDay={setDay} />
-        <Answers day={day} />
+        <Answers day={day} answersData={answersData} />
       </section>
     </div>
   )
