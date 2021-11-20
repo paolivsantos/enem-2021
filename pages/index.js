@@ -1,6 +1,6 @@
 import Head from 'next/head'
-import Header from './components/Header'
-import coresProvas from './helpers/cores-provas'
+import Header from '../src/components/Header'
+import coresProvas from '../src/helpers/cores-provas'
 
 export default function Home() {
   return (
