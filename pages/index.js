@@ -3,6 +3,7 @@ import { useState } from 'react'
 import Answers from '../components/Answers'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
+import Loader from '../components/Loader'
 import coresProvas from '../helpers/cores-provas'
 import getDiffDate from '../helpers/diff-dates'
 import respostasProvas from '../helpers/respostas-prova'
@@ -10,10 +11,13 @@ import respostasProvas from '../helpers/respostas-prova'
 export default function Home() {
   const [day, setDay] = useState('01')
   const [answersData, setAnswersData] = useState(respostasProvas)
+  const [loading, setLoading] = useState(true)
 
   useState(() => {
     const diff = getDiffDate(new Date(), new Date('2021-11-28'))
     setDay(diff > 0 ? '01' : '02')
+
+    setTimeout(() => setLoading(false), 3000)
   }, [])
 
   return (
@@ -29,18 +33,13 @@ export default function Home() {
         <title>Correção Enem 2021 - Notícias - R7 Educação</title>
       </Head>
 
-      {/* <div className="flex items-center justify-center bg-gray-100 w-screen h-screen">
-        <div 
-          style={{ borderTopColor: 'transparent' }} 
-          className="w-16 h-16 border-4 border-blue-400 border-solid rounded-full animate-spin">
-        </div>
-      </div> */}
-
       <section className="container mx-auto my-5 px-8 md:py-0">
         <Header coresProvas={coresProvas} day={day} setDay={setDay} />
         <Answers day={day} answersData={answersData} />
         <Footer />
       </section>
+
+      {loading && <Loader />}
     </div>
   )
 }
