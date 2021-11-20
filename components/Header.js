@@ -1,4 +1,4 @@
-export default function Header({ coresProvas, setDay }) {
+export default function Header({ coresProvas, day, setDay }) {
 
   const handleDay = (e) => {
     const { currentTarget: target } = e
@@ -34,6 +34,7 @@ export default function Header({ coresProvas, setDay }) {
             name="provaDia" 
             id="provaDia" 
             onChange={handleDay}
+            defaultValue={day}
             className="shadow border bg-white rounded w-full py-2 px-3 leading-tight max-w-md">
             <option value="01">Primeiro dia</option>
             <option value="02">Segundo dia</option>

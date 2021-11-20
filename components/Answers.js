@@ -9,7 +9,7 @@ export default function Answers({ day, answersData }) {
 
           <h2 className="text-2xl mb-3 pb-3 text-gray-700 font-bold">{q.title}</h2>
 
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-1 md:gap-2 lg:gap-3">
             {q.questionsRange.map((k, j) => {
               const id = k + 1
               

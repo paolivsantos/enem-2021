@@ -4,6 +4,7 @@ import Answers from '../components/Answers'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import coresProvas from '../helpers/cores-provas'
+import getDiffDate from '../helpers/diff-dates'
 import respostasProvas from '../helpers/respostas-prova'
 
 export default function Home() {
@@ -11,12 +12,8 @@ export default function Home() {
   const [answersData, setAnswersData] = useState(respostasProvas)
 
   useState(() => {
-    const defaultDay = day
-    const today = new Date();
-    const todayDate = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
-
-    setDay(todayDate === '2021-11-21' ? '01' : defaultDay)
-    setDay(todayDate === '2021-11-28' ? '02' : defaultDay)
+    const diff = getDiffDate(new Date(), new Date('2021-11-28'))
+    setDay(diff > 0 ? '01' : '02')
   }, [])
 
   return (
@@ -40,7 +37,7 @@ export default function Home() {
       </div> */}
 
       <section className="container mx-auto my-5 px-8 md:py-0">
-        <Header coresProvas={coresProvas} setDay={setDay} />
+        <Header coresProvas={coresProvas} day={day} setDay={setDay} />
         <Answers day={day} answersData={answersData} />
         <Footer />
       </section>
