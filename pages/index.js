@@ -1,8 +1,21 @@
 import Head from 'next/head'
+import { useState } from 'react'
+import Answers from '../components/Answers'
 import Header from '../components/Header'
 import coresProvas from '../helpers/cores-provas'
 
 export default function Home() {
+  const [day, setDay] = useState('01')
+
+  useState(() => {
+    const defaultDay = day
+    const today = new Date();
+    const todayDate = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
+
+    setDay(todayDate === '2021-11-21' ? '01' : defaultDay)
+    setDay(todayDate === '2021-11-28' ? '02' : defaultDay)
+  }, [])
+
   return (
     <div className="block min-h-screen">
       <Head>
@@ -23,9 +36,10 @@ export default function Home() {
         </div>
       </div> */}
 
-      <main className="container mx-auto my-5 px-8 md:py-0">
-        <Header coresProvas={coresProvas} />
-      </main>
+      <section className="container mx-auto my-5 px-8 md:py-0">
+        <Header coresProvas={coresProvas} setDay={setDay} />
+        <Answers day={day} />
+      </section>
     </div>
   )
 }

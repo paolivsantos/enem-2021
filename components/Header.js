@@ -1,14 +1,23 @@
-export default function Header({ coresProvas }) {
+export default function Header({ coresProvas, setDay }) {
+
+  const handleDay = (e) => {
+    const { currentTarget: target } = e
+    setDay(target.value)
+  }
 
   return (
-    <header className="grid grid-cols-1 grid-rows-2 gap-5 lg:grid-cols-2 lg:grid-rows-1">
+    <header className="grid grid-cols-1 grid-rows-2 gap-5 lg:grid-cols-2 lg:grid-rows-1 mb-20">
       {/* Dia da Prova */}
       <div>
         <label htmlFor="provaDia" className="block text-gray-700 font-bold mb-2">
           Selecione o dia da sua prova
         </label>
 
-        <select name="provaDia" id="provaDia" className="shadow border bg-white rounded w-full py-2 px-3 leading-tight max-w-md">
+        <select 
+          name="provaDia" 
+          id="provaDia" 
+          onChange={handleDay}
+          className="shadow border bg-white rounded w-full py-2 px-3 leading-tight max-w-md">
           <option value="01">Primeiro dia</option>
           <option value="02">Segundo dia</option>
         </select>
