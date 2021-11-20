@@ -1,4 +1,4 @@
-export default function Header({ coresProvas, day, setDay }) {
+export default function Header({ provas, day, setDay }) {
 
   const handleDay = (e) => {
     const { currentTarget: target } = e
@@ -48,11 +48,17 @@ export default function Header({ coresProvas, day, setDay }) {
           </div>
 
           <div className="grid grid-cols-2 grid-rows-4 sm:grid-cols-3 sm:grid-rows-2 gap-2">
-            {coresProvas.map((cp, i) => (
-              <label className="grid grid-cols-3 gap-1 items-center w-20" key={i}>
-                <input type="radio" name="corProva" value={cp.cor} defaultChecked={cp.checked} />
-                <span className={`block h-5 w-5 border ${cp.cor}`}></span>
-                <span className="capitalize">{cp.nome}</span>
+            {provas.map((prova, i) => (
+              <label 
+                className={`grid grid-cols-3 gap-1 items-center w-20 ${prova.exibirProva === 'sim' ? '' : 'hidden'} ${day === '01' && prova.disponivelPrimeiroDia !== 'sim' ? 'hidden' : ''} ${day === '02' && prova.disponivelSegundoDia !== 'sim' ? 'hidden' : ''}`}
+                key={i} 
+                data-js-primeiro-dia={prova.disponivelPrimeiroDia} 
+                data-js-segundo-dia={prova.disponivelSegundoDia}
+                data-js-snippet={prova.snippetProva}
+              >
+                <input type="radio" name="corProva" value={prova.nomeProva} defaultChecked={prova.provaPadrao === 'sim'} />
+                <span className="block h-5 w-5 border" style={{ backgroundColor: prova.corProva }}></span>
+                <span className="capitalize">{prova.nomeProva}</span>
               </label>
             ))}
           </div>

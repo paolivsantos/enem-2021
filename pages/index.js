@@ -4,11 +4,10 @@ import Answers from '../components/Answers'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import Loader from '../components/Loader'
-import coresProvas from '../helpers/cores-provas'
 import getDiffDate from '../helpers/diff-dates'
 import respostasProvas from '../helpers/respostas-prova'
 
-export default function Home() {
+export default function Home({ provas }) {
   const [day, setDay] = useState('01')
   const [answersData, setAnswersData] = useState(respostasProvas)
   const [loading, setLoading] = useState(true)
@@ -34,7 +33,7 @@ export default function Home() {
       </Head>
 
       <section className="container mx-auto my-5 px-8 md:py-0">
-        <Header coresProvas={coresProvas} day={day} setDay={setDay} />
+        <Header provas={provas} day={day} setDay={setDay} />
         <Answers day={day} answersData={answersData} />
         <Footer />
       </section>
@@ -42,4 +41,12 @@ export default function Home() {
       {loading && <Loader />}
     </div>
   )
+}
+
+export async function getServerSideProps(context) {
+  const res = await fetch('https://snippets.r7.com/snippet/619967ca8509f36f3900002b')
+  const data = await res.json()
+  const { itens: provas } = data
+
+  return { props: { provas } }
 }

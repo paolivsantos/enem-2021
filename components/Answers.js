@@ -18,9 +18,10 @@ export default function Answers({ day, answersData }) {
                   data-js-question={id} 
                   className="w-14 h-14 flex items-center justify-between flex-col p-1 border border-gray-400 rounded hover:bg-gray-200" 
                   key={j} 
+                  data-js-link={answersData[k].link}
                 >
                   <span className="text-base text-gray-600">{id}</span>
-                  <span className="text-base uppercase" data-js-answer>{answersData[k]}</span>
+                  <span className="text-base uppercase" data-js-answer>{answersData[k].answer}</span>
                 </div>
               )
             })}

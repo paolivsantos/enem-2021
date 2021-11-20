@@ -1,1 +1,1 @@
-export default [...Array(180).keys()].map(k => '-')
+export default [...Array(180).keys()].map(k => ({ answer: '-', link: '' }))
