@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { useState } from 'react'
 import Answers from '../components/Answers'
+import Footer from '../components/Footer'
 import Header from '../components/Header'
 import coresProvas from '../helpers/cores-provas'
 import respostasProvas from '../helpers/respostas-prova'
@@ -41,6 +42,7 @@ export default function Home() {
       <section className="container mx-auto my-5 px-8 md:py-0">
         <Header coresProvas={coresProvas} setDay={setDay} />
         <Answers day={day} answersData={answersData} />
+        <Footer />
       </section>
     </div>
   )

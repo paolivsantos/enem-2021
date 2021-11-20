@@ -9,18 +9,18 @@ export default function Answers({ day, answersData }) {
 
           <h2 className="text-2xl mb-3 pb-3 text-gray-700 font-bold">{q.title}</h2>
 
-          <div className="inline-flex flex-wrap gap-3 w-full">
+          <div className="flex flex-wrap gap-3">
             {q.questionsRange.map((k, j) => {
               const id = k + 1
               
               return (
                 <div 
                   data-js-question={id} 
-                  className="w-14 h-14 flex items-center justify-between flex-col p-1 border border-gray-400 rounded" 
+                  className="w-14 h-14 flex items-center justify-between flex-col p-1 border border-gray-400 rounded hover:bg-gray-200" 
                   key={j} 
                 >
-                  <span className="text-sm">{id}</span>
-                  <span className="text-base uppercase font-bold" data-js-answer>{answersData[k]}</span>
+                  <span className="text-base text-gray-600">{id}</span>
+                  <span className="text-base uppercase" data-js-answer>{answersData[k]}</span>
                 </div>
               )
             })}
