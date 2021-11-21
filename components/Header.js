@@ -1,4 +1,18 @@
-export default function Header({ provas, day, setDay }) {
+import Router from 'next/router'
+
+export default function Header({ provas, provaEscolhida, day, setDay, setLoading }) {
+
+  const updateQuery = (newQuery) => {
+    Router.push({
+      pathname: '/',
+      query: { cor: encodeURI(newQuery) },
+    })
+
+    Router.events.on('routeChangeComplete', () => {
+      setLoading(true)
+      window.location.reload()
+    })
+  };
 
   const handleDay = (e) => {
     const { currentTarget: target } = e
@@ -9,12 +23,12 @@ export default function Header({ provas, day, setDay }) {
     <header>
       {/* Patrocinador */}
       <div className="grid grid-cols-1 grid-rows-2 gap-1 sm:grid-rows-1 sm:grid-cols-2 sm:gap-5 items-center lg:grid-cols-3 border-b border-gray-300 pb-0 sm:pb-5 mb-7 sm:mb-14">
-        <img 
-          src="/logo.jpg" 
-          alt="Logo: Colégio Anglo Leonado da Vinci" 
-          title="Colégio Anglo Leonado da Vinci" 
-          width="726" 
-          height="289" 
+        <img
+          src="/logo.jpg"
+          alt="Logo: Colégio Anglo Leonado da Vinci"
+          title="Colégio Anglo Leonado da Vinci"
+          width="726"
+          height="289"
           loading="lazy"
           className="w-full h-auto max-w-sm" />
 
@@ -30,9 +44,9 @@ export default function Header({ provas, day, setDay }) {
             Selecione o dia da sua prova
           </label>
 
-          <select 
-            name="provaDia" 
-            id="provaDia" 
+          <select
+            name="provaDia"
+            id="provaDia"
             onChange={handleDay}
             defaultValue={day}
             className="shadow border bg-white rounded w-full py-2 px-3 leading-tight max-w-md">
@@ -49,16 +63,17 @@ export default function Header({ provas, day, setDay }) {
 
           <div className="grid grid-cols-2 grid-rows-4 sm:grid-cols-3 sm:grid-rows-2 gap-2">
             {provas.map((prova, i) => (
-              <label 
-                className={`grid grid-cols-3 gap-1 items-center w-20 ${prova.exibirProva === 'sim' ? '' : 'hidden'} ${day === '01' && prova.disponivelPrimeiroDia !== 'sim' ? 'hidden' : ''} ${day === '02' && prova.disponivelSegundoDia !== 'sim' ? 'hidden' : ''}`}
-                key={i} 
-                data-js-primeiro-dia={prova.disponivelPrimeiroDia} 
-                data-js-segundo-dia={prova.disponivelSegundoDia}
+              <label
+                className={`grid grid-cols-3 gap-1 items-center w-20 cursor-pointer ${prova.exibirProva === 'sim' ? '' : 'hidden'} ${day === '01' && prova.disponivelPrimeiroDia !== 'sim' ? 'hidden' : ''} ${day === '02' && prova.disponivelSegundoDia !== 'sim' ? 'hidden' : ''}`}
+                key={i}
                 data-js-snippet={prova.snippetProva}
               >
-                <input type="radio" name="corProva" value={prova.nomeProva} defaultChecked={prova.provaPadrao === 'sim'} />
+
+                <input type="radio" name="corProva" value={prova.nomeProva} defaultChecked={prova.nomeProva === provaEscolhida.nomeProva} onClick={() => { updateQuery(prova.nomeProva) }} />
+
                 <span className="block h-5 w-5 border" style={{ backgroundColor: prova.corProva }}></span>
                 <span className="capitalize">{prova.nomeProva}</span>
+
               </label>
             ))}
           </div>

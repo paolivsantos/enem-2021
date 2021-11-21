@@ -7,16 +7,17 @@ import Loader from '../components/Loader'
 import getDiffDate from '../helpers/diff-dates'
 import respostasProvas from '../helpers/respostas-prova'
 
-export default function Home({ provas }) {
+export default function Home({ provas, respostas, provaEscolhida }) {
   const [day, setDay] = useState('01')
-  const [answersData, setAnswersData] = useState(respostasProvas)
-  const [loading, setLoading] = useState(true)
+  const [answersData, setAnswersData] = useState(respostas)
+  const [loading, setLoading] = useState(false)
 
   useState(() => {
     const diff = getDiffDate(new Date(), new Date('2021-11-28'))
     setDay(diff > 0 ? '01' : '02')
 
-    setTimeout(() => setLoading(false), 3000)
+    // atualiza a página a cada 4 minutos
+    setInterval(() => window.location.reload(), 60000 * 4)
   }, [])
 
   return (
@@ -33,8 +34,16 @@ export default function Home({ provas }) {
       </Head>
 
       <section className="container mx-auto my-5 px-8 md:py-0">
-        <Header provas={provas} day={day} setDay={setDay} />
+        <Header 
+          provas={provas} 
+          provaEscolhida={provaEscolhida} 
+          day={day} 
+          setDay={setDay} 
+          setLoading={setLoading} 
+        />
+
         <Answers day={day} answersData={answersData} />
+
         <Footer />
       </section>
 
@@ -44,9 +53,31 @@ export default function Home({ provas }) {
 }
 
 export async function getServerSideProps(context) {
+  const { query } = context
+  const { cor } = query || {}
+
+  // recupera snippet de configuração
   const res = await fetch('https://snippets.r7.com/snippet/619967ca8509f36f3900002b')
   const data = await res.json()
   const { itens: provas } = data
+  
+  // filtra a prova pela cor
+  const provaEscolhida = cor ? provas.find(i => i.nomeProva === cor) : provas.find(i => i.provaPadrao === 'sim')
+  const { snippetProva: snippet } = provaEscolhida
 
-  return { props: { provas } }
+  // recupera as respostas cadastradas
+  const resSnippet = await fetch(snippet)
+  const dataSnippet = await resSnippet.json()
+  const { itens: respostasSnippet } = dataSnippet
+
+  // mescla as respostas cadastras com as respostas default
+  const respostas = respostasProvas.map((r, indice) => {
+    const rs = respostasSnippet.find(rs => Number(rs.numeroQuestao) === indice + 1)
+    return {
+      answer: rs.respostaQuestao || r.answer,
+      link: rs.linkCorrecao?.text || r.link
+    }
+  })
+
+  return { props: { provas, respostas, provaEscolhida } }
 }
