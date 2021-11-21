@@ -71,9 +71,12 @@ export async function getServerSideProps(context) {
   // mescla as respostas cadastras com as respostas default
   const respostas = respostasProvas.map((r, indice) => {
     const rs = respostasSnippet.find(rs => Number(rs.numeroQuestao) === indice + 1)
+    
     return {
-      answer: rs.respostaQuestao || r.answer,
-      link: rs.linkCorrecao?.text || r.link
+      question: rs?.numeroQuestao || r.question,
+      section: rs?.categoriaQuestao || r.section,
+      answer: rs?.respostaQuestao || r.answer,
+      link: rs?.linkCorrecao?.text || r.link
     }
   })
 

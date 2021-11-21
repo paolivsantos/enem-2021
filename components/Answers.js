@@ -21,18 +21,23 @@ export default function Answers({ day, answersData }) {
           <div className="flex flex-wrap gap-1 md:gap-2 lg:gap-3">
             {q.questionsRange.map((k, j) => {
               const id = k + 1
+
+              let answerData = answersData[k]
+              if (q.title.trim().toLowerCase().includes('espanhol')) {
+                answerData = answersData[k + 180]
+              }
               
               return (
                 <div 
                   data-js-question={id} 
-                  data-js-link={answersData[k].link}
+                  data-js-link={answerData?.link}
                   key={j} 
                   role="link"
                   onClick={handleClick}
-                  className={`w-14 h-14 flex items-center justify-between flex-col p-1 border border-gray-400 rounded hover:bg-gray-200 ${answersData[k].link === '' ? '' : 'cursor-pointer'}`}
+                  className={`w-14 h-14 flex items-center justify-between flex-col p-1 border border-gray-400 rounded hover:bg-gray-200 ${answerData?.link === '' ? '' : 'cursor-pointer'}`}
                 >
                   <span className="text-base text-gray-600">{id}</span>
-                  <span className="text-base uppercase" data-js-answer>{answersData[k].answer}</span>
+                  <span className="text-base uppercase" data-js-answer>{answerData?.answer}</span>
                 </div>
               )
             })}
