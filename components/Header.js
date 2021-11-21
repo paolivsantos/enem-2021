@@ -58,7 +58,7 @@ export default function Header({ provas, provaEscolhida, day, setDay, setLoading
         {/* Cores das Provas */}
         <div className="max-w-3xl">
           <div className="block text-gray-700 font-bold mb-2">
-            Selecione o dia da sua prova
+            Selecione a cor da sua prova
           </div>
 
           <div className="grid grid-cols-2 grid-rows-4 sm:grid-cols-3 sm:grid-rows-2 gap-2">
