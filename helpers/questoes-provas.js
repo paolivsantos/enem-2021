@@ -1,5 +1,5 @@
 export default [{
-  title: 'Língua Estrangeira',
+  title: 'Língua Estrangeira - Inglês',
   day: '01',
   questionsRange: [...Array(180).keys()].filter(k => k >= 0 && k <= 4)
 },{
