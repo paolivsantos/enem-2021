@@ -15,9 +15,6 @@ export default function Home({ provas, respostas, provaEscolhida }) {
   useState(() => {
     const diff = getDiffDate(new Date(), new Date('2021-11-28'))
     setDay(diff > 0 ? '01' : '02')
-
-    // atualiza a página a cada 4 minutos
-    setInterval(() => window.location.reload(), 60000 * 4)
   }, [])
 
   return (
@@ -27,6 +24,7 @@ export default function Home({ provas, respostas, provaEscolhida }) {
         <meta name="description" content="Acompanhe o gabarito oficial e a correção de todas as questões do Enem 2021 no R7 Educação." />
         <meta name="author" content="https://www.r7.com" />
         <meta name="publisher" content="https://www.r7.com" />
+        <meta http-equiv="refresh" content="60; /" />
 
         <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.png" />
 
