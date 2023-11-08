@@ -23,7 +23,7 @@ export default function Header({ provas, provaEscolhida, day, setDay, setLoading
     <header>
       {/* Patrocinador */}
       <div className="grid grid-cols-1 grid-rows-2 gap-1 sm:grid-rows-1 sm:grid-cols-2 sm:gap-5 items-center lg:grid-cols-3 border-b border-gray-300 pb-0 sm:pb-5 mb-7 sm:mb-14">
-        <h1 className="w-full text-center font-bold text-gray-700 md:text-left mt-0 sm:mt-10">
+        <h1 className="w-full text-center font-bold text-gray-700 md:text-left mt-0 sm:mt-10 text-5xl">
           Gabarito extraoficial
         </h1>
       </div>
