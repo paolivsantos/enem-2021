@@ -13,7 +13,7 @@ export default function Home({ provas, respostas, provaEscolhida }) {
   const [loading, setLoading] = useState(false)
 
   useState(() => {
-    const diff = getDiffDate(new Date(), new Date('2021-11-28'))
+    const diff = getDiffDate(new Date(), new Date('2023-11-12'))
     setDay(diff > 0 ? '01' : '02')
   }, [])
 
