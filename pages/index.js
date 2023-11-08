@@ -42,7 +42,6 @@ export default function Home({ provas, respostas, provaEscolhida }) {
 
         <Answers day={day} answersData={answersData} />
 
-        <Footer />
       </section>
 
       {loading && <Loader />}
