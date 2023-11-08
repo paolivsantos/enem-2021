@@ -21,14 +21,14 @@ export default function Home({ provas, respostas, provaEscolhida }) {
     <div className="block min-h-screen">
       <Head>
         <meta name="robots" content="noindex,nofollow" />
-        <meta name="description" content="Acompanhe o gabarito oficial e a correção de todas as questões do Enem 2021 no R7 Educação." />
+        <meta name="description" content="Acompanhe o gabarito oficial e a correção de todas as questões do Enem 2023 no R7 Educação." />
         <meta name="author" content="https://www.r7.com" />
         <meta name="publisher" content="https://www.r7.com" />
         <meta http-equiv="refresh" content="60; /" />
 
         <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.png" />
 
-        <title>Correção Enem 2021 - Notícias - R7 Educação</title>
+        <title>Correção Enem 2023 - Notícias - R7 Educação</title>
       </Head>
 
       <section className="container mx-auto my-5 px-8 md:py-0">
